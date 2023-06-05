@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>ThisISWhyImBroke :: The Internets's Mall Clone</title>
+  <link rel="icon" href="images/cash-in-hand-logo-small2.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato&family=Poppins&family=Roboto+Condensed:wght@700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <header class="main-navbar">
+    <div class="header-main">
+      <div class="image-container">
+        <img class="logo" src="images/header-logo.png" alt="ThisISWhyImBroke">
+      </div>
+      <div class="middle-section">
+        <input class="search-box" type="text" placeholder="Search...">
+        <button>
+          <img class="search-icon" src="images/search-logo.png" alt="searchicon">
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Register</a></li>
+      </nav>
+    </div>
+
+    <div class="navbar">
+      <a class="whatsnew" href="index.html">WHATS NEW</a>
+      <div class="dropdown" onmouseover="showRecipientOptions()" onmouseout="hideRecipientOptions()">
+        <button class="dropbtn btn-1">GIFTS BY RECIPTENT
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="men.html">Men</a>
+          <a href="women.html">Women</a>
+          <a href="#">Dad</a>
+          <a href="#">Mom</a>
+          <a href="#">Kids</a>
+          <a href="#">Teen Boys</a>
+          <a href="#">Teen Girls</a>
+          <a href="#">Couples</a>
+          <a href="#">Boyfriend</a>
+          <a href="#">Girlfriend</a>
+          <a href="#">Husband</a>
+          <a href="#">Wife</a>
+          <a href="#">Persons</a>
+          <a href="#">Coworkers</a>
+          <a href="#">Boss</a>
+          <a href="#">Grandma</a>
+        </div>
+      </div>
+
+
+      <div class="dropdown">
+        <button class="dropbtn">GIFTS BY OCCASION
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Father's Day</a>
+          <a href="#">Mother's Day</a>
+          <a href="#">Valetines For Her</a>
+          <a href="#">Valetines For Him</a>
+          <a href="#">Anniversary For Her</a>
+          <a href="#">Anniversary For Him</a>
+          <a href="#">Birthday Gifts For Him</a>
+          <a href="#">White Elephant</a>
+          <a href="#">Secret Santa</a>
+          <a href="#">Ugly Christmas Sweaters</a>
+          <a href="#">Graduation</a>
+          <a href="#">Engagement</a>
+          <a href="#">Groomsmen</a>
+          <a href="#">Bridesmaids</a>
+          <a href="#">Wedding</a>
+          <a href="#">Housewarming</a>
+          <a href="#">Stocking Stuffers For Boys</a>
+        </div>
+      </div>
+
+
+      <div class="dropdown">
+        <button class="dropbtn">GIFTS BY CATEOGERY
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Experience Gifts</a>
+          <a href="#">Personalized Gifts</a>
+          <a href="#">Work From Home</a>
+          <a href="#">Funny</a>
+          <a href="#">Pranks</a>
+          <a href="#">Gag Gifts</a>
+          <a href="#">Geek</a>
+          <a href="#">Gamers</a>
+          <a href="#">Star Wars</a>
+          <a href="#">Harry Potter</a>
+          <a href="#">Tavel Accessories</a>
+          <a href="#">Camping And Outdoors</a>
+          <a href="#">Apoclypse Survival</a>
+          <a href="#">Food</a>
+          <a href="#">Coffee</a>
+          <a href="#">Chocolate</a>
+          <a href="#">Wine</a>
+        </div>
+      </div>
+
+
+      <div class="dropdown">
+        <button class="dropbtn">MORE CATEGORIES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">All Gift Guides</a>
+          <a href="#">Random</a>
+          <a href="#">Submit a Product</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div class="orange"></div>
+      <div class="yellow"></div>
+      <div class="lblue"></div>
+      <div class="blue"></div>
+      <div class="dblue"></div>
+    </div>
+  </header>
+  <script type="text/javascript">
+    window.addEventListener("scroll", function () {
+      var header = document.querySelector("header");
+      header.classList.toggle("sticky1", window.scrollY > 50);
+    })
+  </script>
+  <main>
+    <div class="blog-box">
+      <h1>100+ Mind-Blowing Gifts For Men That He'll Actually Want</h1>
+    </div>
+    <div class="background">
+      <img class="men" src="images/women.jpg">
+    </div>
+    <div>
+      <p class="women-body">Finding gifts for women will be easy if you follow our unique gift guide featuring
+        everything from quirky to funny to must have products. Whether you’re shopping for your girlfriend, wife,
+        mother, sister, daughter, or your BFF, our list of thoughtful gifts for women is bound to have at least one good
+        gift idea for even the pickiest of ladies.
+      </p>
+    </div>
+
+
+
+    <div class="flex-container">
+      <div class="flex-item">
+        <a href="#">Giant Rainbow Pegboard Shelf</a>
+        <img class="item1" src="images/item1.jpg" class="image">
+        <button class="savebtn"> SAVE</button>
+        <p class="item-body">Bring brilliant color and functionality to any wall with this giant rainbow pegboard shelf.
+          You’ll be able to position the different shelves and pegs how you see fit so that you can store everything
+          from
+          tools and knickknacks to sport equipment and winter coats. </p>
+        <p class="item-stat">$2,800.00</p>
+        <a href="https://www.etsy.com/in-en/listing/1095041938/giant-rainbow-pegboard-colourful-wall?show_sold_out_detail=1&source=aw&utm_source=affiliate_window&utm_medium=affiliate&utm_campaign=us_location_buyer&utm_content=141392&utm_term=0&awc=6220_1685862234_f9d3c107668d785778144304975de495"
+          target="_blank">
+          <button class="item-check">CHECK IT OUT</button>
+        </a>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+
+</body>
+
+</html>
