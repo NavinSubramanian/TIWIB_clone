@@ -31,9 +31,10 @@ DEBUG = False #CHANGE TO FALSE IN HOSTING
 
 ALLOWED_HOSTS = ['0917caf3-d9a2-4edc-a8ba-4293d384bdaf.id.repl.co',
                 'tiwib-django.nishanthjanarth.repl.co',
-                 'tiwibclone--navinsubramania.repl.co',
-                 'tiwibclone.navinsubramania.repl.co',
-                '127.0.0.1']
+                'tiwibclone--navinsubramania.repl.co',
+                'tiwibclone.navinsubramania.repl.co',
+                '127.0.0.1',
+                '*',]
 
 
 # Application definition
