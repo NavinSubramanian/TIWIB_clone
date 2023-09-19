@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "TWIB/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "TWIB/wsgi.py"
+      }
+    ]
+}
