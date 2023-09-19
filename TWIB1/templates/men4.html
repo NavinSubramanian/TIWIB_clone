@@ -8,6 +8,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Mynerve&family=Poppins:wght@100;500&family=Plus+Jakarta+Sans:wght@300&display=swap"
     rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'men.css' %}">
 </head>
@@ -17,14 +18,9 @@
     <a href="http://127.0.0.1:8000/"><img src="{% static 'images/ThisIsWhyI_mBroke-removebg-preview.png' %}" class="header__img"></a>
   </div>
 
+  <!-- For search drop
+  
   <section class="search__drop">
-    <div class="line">
-      <div class="orange"></div>
-      <div class="yellow"></div>
-      <div class="lblue"></div>
-      <div class="blue"></div>
-      <div class="dblue"></div>
-    </div>
     <div class="drop__containers">
       <div class="dropdown" onmouseover="showRecipientOptions()" onmouseout="hideRecipientOptions()">
         <button class="dropbtn btn-1">GIFTS BY RECIPTENT
@@ -75,16 +71,23 @@
           <a href="/movie">Movie</a>
         </div>
       </div>
-    </div>
-    <div class="line">
-      <div class="orange"></div>
-      <div class="yellow"></div>
-      <div class="lblue"></div>
-      <div class="blue"></div>
-      <div class="dblue"></div>
+
+      <div class="dropdown">
+        <button class="dropbtn">MORE CATEGORIES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/allgiftsguide">All Guides</a>
+          <a href="/contactus">Contact Us</a>
+          <a href="/submitaproduct">Submit a Product</a>
+        </div>
+      </div>
+      
     </div>
 
-  </section>
+  </section> 
+  
+  -->
 
   <section class="men_section">
     {% for op in values %}
@@ -94,112 +97,234 @@
     <div class="background">
       <img class="men" src="{{op.photo}}">
     </div>
-    <div>
+    <div class="body">
       <p class="men-body">{{op.description|safe}} </p>
     </div>
     {% endfor %}
   </section>
-
-  <section class="search__filter">
-    <div class="search__container">
-      <form action="search" class="search-bar" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="search here" name="query" list="val" value="{{v}}" style="appearance:none;">
-        <datalist id="val">
-          {%for i in val%}
-          <option value="{{i.name}}"></option>
-          {% endfor %}
-        </datalist><button type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
-    <div class="filter__container">
-      <div class="price range">
-        <header>
-          <h2>Price Range</h2>
-          <p>Use slider or enter min and max price</p>
-        </header>
-        <div class="price-input">
-          <div class="field">
-            <span>Min</span>
-            <input type="number" class="input-min inpu" value="2500">
+  
+  <section class="whole__container">
+    <button class="burger"><i class='bx bx-menu'></i>    </button>
+    <div class="sidebar close">
+        <ul class="nav-links">
+          <div class="logo-details">
+            <i class='bx bx-filter'></i>
+            <span class="logo_name">Filter</span>
           </div>
-          <div class="separator">-</div>
-          <div class="field">
-            <span>Max</span>
-            <input type="number" class="input-max inpu" value="7500">
+          
+          <div class="search__container">
+            <form action="search" class="search-bar-2" method="post">
+              {% csrf_token %}
+              <input type="text" placeholder="search here" name="query" list="val" value="{{v}}" class="search-text">
+               <datalist id="val">
+                {%for i in val%}
+                <option value="{{i.name}}"></option>
+                {% endfor %}
+              </datalist>
+              <button type="submit" class="bar-button-2"><i class="fa fa-search"></i></button>
+            </form>
           </div>
-        </div>
-        <div class="slider">
-          <div class="progress"></div>
-        </div>
-        <div class="range-input">
-          <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-          <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
-        </div>
-      </div>
+            <li>
+                <a href="#">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Accessories</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Accessories</a></li>
+                    <li><a href="#">Bags</a></li>
+                    <li><a href="#">Belts</a></li>
+                    <li><a href="#">Cosmetics</a></li>
+                    <li><a href="#">Hats</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name">Franchise</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Franchise</a></li>
+                    <li><a href="/anime">Anime</a></li>
+                    <li><a href="#">Marvel</a></li>
+                    <li><a href="#">DC</a></li>
+                    <li><a href="/starwars">StarWars</a></li>
+                    <li><a href="#">Lego</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Gift by Reciptent</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Gift By Reciptent</a></li>
+                    <li><a href="/men">Men</a></li>
+                    <li><a href="/women">Women</a></li>
+                    <li><a href="/dad">Dad</a></li>
+                    <li><a href="/mom">Mom</a></li>
+                    <li><a href="/kids">Kids</a></li>
+                    <li><a href="/teenboys">Teen Boys</a></li>
+                    <li><a href="/teengirls">Teen Girls</a></li>
+                    <li><a href="/boyfriend">Boyfriend</a></li>
+                    <li><a href="/girlfriend">Girlfriend</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-cart'></i>
+                        <span class="link_name">Gifts By Ocassion</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Gifts By Ocassion</a></li>
+                    <li><a href="/fathersday">Father's Day</a></li>
+                    <li><a href="/mothersday">Mother's Day</a></li>
+                    <li><a href="/valentinesday">Valentine's Day</a></li>
+                    <li><a href="/anniversary">Anniversary</a></li>
+                    <li><a href="/birthdaygifts">Birthday Gifts</a></li>
+                    <li><a href="/graduation">Graduation</a></li>
+                    <li><a href="/engagement">Engagement</a></li>
+                    <li><a href="/wedding">Wedding</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-category'></i>
+                    <span class="link_name">Gifts By Category</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Gifts By Category</a></li>
+                    <li><a href="#">Funny</a></li>
+                    <li><a href="#">Gag Gifts</a></li>
+                    <li><a href="#">Geek</a></li>
+                    <li><a href="#">Gamers</a></li>
+                    <li><a href="#">Food</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Movies</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-category-alt'></i>
+                    <span class="link_name">More Categories</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">More Categories</a></li>
+                    <li><a href="#">All Gift Guides</a></li>
+                    <li><a href="#">Random</a></li>
+                    <li><a href="#">Submit a Product</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Home</span>
+                </a>
+            </li>
+          <li>
+            <hr style="margin: 5px;">
+            </hr>
+            <div class="filter__container">
+              <div class="price range">
+                <header>
+                    <h2>Price Range</h2>
+                </header>
+                <div class="price-input">
+                  <div class="field">
+                    <span>Min</span>
+                    <input type="number" class="input-min inpu" value="2500">
+                  </div>
+                  <div class="separator">-></div>
+                  <div class="field">
+                    <span>Max</span>
+                    <input type="number" class="input-max inpu" value="7500">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <button class="apply__filter">Apply Filter</button>
+          </li>
+        </ul>
     </div>
     <script>
-      const rangeInput = document.querySelectorAll(".range-input input"),
-      priceInput = document.querySelectorAll(".price-input input"),
-      range = document.querySelector(".slider .progress");
-      let priceGap = 1000;
-      priceInput.forEach(input =>{
-          input.addEventListener("input", e =>{
-              let minPrice = parseInt(priceInput[0].value),
-              maxPrice = parseInt(priceInput[1].value);
-              
-              if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
-                  if(e.target.className === "input-min"){
-                      rangeInput[0].value = minPrice;
-                      range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
-                  }else{
-                      rangeInput[1].value = maxPrice;
-                      range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-                  }
-              }
-          });
-      });
-      rangeInput.forEach(input =>{
-          input.addEventListener("input", e =>{
-              let minVal = parseInt(rangeInput[0].value),
-              maxVal = parseInt(rangeInput[1].value);
-              if((maxVal - minVal) < priceGap){
-                  if(e.target.className === "range-min"){
-                      rangeInput[0].value = maxVal - priceGap
-                  }else{
-                      rangeInput[1].value = minVal + priceGap;
-                  }
-              }else{
-                  priceInput[0].value = minVal;
-                  priceInput[1].value = maxVal;
-                  range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
-                  range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-              }
-          });
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+  // let sidebar = document.querySelector(".sidebar");
+  // let sidebarBtn = document.querySelector(".bx-menu");
+  // console.log(sidebarBtn);
+  // sidebarBtn.addEventListener("click", ()=>{
+  //   sidebar.classList.toggle("close");
+  // });
+    </script>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".bx-menu");
+      console.log(sidebarBtn);
+      sidebarBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("close");
       });
     </script>
-  </section>
-
-  <section class="item__layout2">
-    <div id="single">
-        {% for op in value %}
-          <div class="single-content">
-              <div style="align-items:center;">
-              <img src="{{op.pic}}" alt="" class="img1">
-              <div class="top">#{{forloop.counter}}</div>
-              </div>
-              <div  class="inner-two">
-                <h3> {{op.name}}</h3>
-                <div>
-                <h1>$ {{op.rate}}</h1>
-                <button><a href="{{op.link}}" style="text-decoration: none; color:white;">Check It out</a></button>
+  
+    <div class="item__layout2">
+      <div id="single">
+          {% for op in value %}
+            <div class="single-content">
+                <div class="image-single">
+                  <img src="{{op.pic}}" alt="" class="img1">
+                  <div class="top">#{{forloop.counter}}</div>
+                </div>
+                <div  class="inner-two">
+                  <h3> {{op.name}}</h3>
+                  <p>{{op.des}}</p>
+                  <div>
+                    <h1>$ {{op.rate}}</h1>
+                    <button><a href="{{op.link}}" style="text-decoration: none; color:white;">Check It out</a></button>
                   </div>
-                <p>{{op.des}}</p>
-              </div>
-            </div> 
-            {% endfor %}       
+                </div>
+              </div> 
+              {% endfor %}       
+            </div>
           </div>
   </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-text">
+          <p>
+            <img src="https://www.thisiswhyimbroke.com/assets/images/cash-in-hand-logo-large.png" alt="This Is Why Im Broke logo" class="footer-logo">
+            THIS IS WHY IM BROKE
+          </p>
+          <h4>© 2023 ThisIsWhyImBroke. All rights reserved.</h4>
+          <div class="footer-links">
+            <a href="#">Contact Us</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        <p>
+          ThisIsWhyImBroke is reader supported, some products displayed may earn us a commission if you purchase through our links. ThisIsWhyImBroke is a participant in the Amazon Services LLC Associates Program.<a href=#>Learn more about how our site works.</a>
+        </p>
+      </div>
+    </div>
+   </footer>
 
 </body>
 

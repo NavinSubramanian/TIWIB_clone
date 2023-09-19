@@ -14,7 +14,7 @@
 
 <body>
   <div class="main__logo">
-    <a href="./index.html"><img src="ThisIsWhyI_mBroke-removebg-preview.png" class="header__img"></a>
+    <a href="http://127.0.0.1:8000/"><img src="{% static 'images/ThisIsWhyI_mBroke-removebg-preview.png' %}" class="header__img"></a>
   </div>
 
   <section class="search__drop">
@@ -31,15 +31,15 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="men.html">Men</a>
-          <a href="women.html">Women</a>
-          <a href="dad/">Dad</a>
-          <a href="mom/">Mom</a>
-          <a href="kids/">Kids</a>
-          <a href="teenboys/">Teen Boys</a>
-          <a href="teengirls/">Teen Girls</a>
-          <a href="boyfriend/">Boyfriend</a>
-          <a href="girlfriend/">Girlfriend</a>
+          <a href="/men">Men</a>
+          <a href="/women">Women</a>
+          <a href="/dad">Dad</a>
+          <a href="/mom">Mom</a>
+          <a href="kids">Kids</a>
+          <a href="/teenboys">Teen Boys</a>
+          <a href="/teengirls">Teen Girls</a>
+          <a href="/boyfriend">Boyfriend</a>
+          <a href="/girlfriend">Girlfriend</a>
         </div>
       </div>
 
@@ -49,14 +49,14 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="fathersday/">Father's Day</a>
-          <a href="mothersday/">Mother's Day</a>
-          <a href="valentinesday/">Valetines Day</a>
-          <a href="aniversary/">Anniversary</a>
-          <a href="birthdaygift/">Birthday Gifts</a>
-          <a href="graduation/">Graduation</a>
-          <a href="engagement/">Engagement</a>
-          <a href="wedding/">Wedding</a>
+          <a href="/fathersday">Father's Day</a>
+          <a href="/mothersday">Mother's Day</a>
+          <a href="/valentinesday">Valetines Day</a>
+          <a href="/aniversary">Anniversary</a>
+          <a href="/birthdaygift">Birthday Gifts</a>
+          <a href="/graduation">Graduation</a>
+          <a href="/engagement">Engagement</a>
+          <a href="/wedding">Wedding</a>
         </div>
       </div>
 
@@ -66,28 +66,27 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="funny/">Funny</a>
-          <a href="gaggifts/">Gag Gifts</a>
-          <a href="geek/">Geek</a>
-          <a href="gamers/">Gamers</a>
-          <a href="food/">Food</a>
-          <a href="travel/">Travel</a>
-          <a href="movie/">Movie</a>
+          <a href="/funny">Funny</a>
+          <a href="/gaggifts">Gag Gifts</a>
+          <a href="/geek">Geek</a>
+          <a href="/gamers">Gamers</a>
+          <a href="/food">Food</a>
+          <a href="/travel">Travel</a>
+          <a href="/movie">Movie</a>
         </div>
       </div>
-
 
       <div class="dropdown">
         <button class="dropbtn">MORE CATEGORIES
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="guides.html/">All Gift Guides</a>
-          <a href="gaggifts/">Random</a>
-          <a href="submitprd.html">Submit a product</a>
-          <a href="contact.html">Contact Us</a>
+          <a href="/allgiftsguide">All Guides</a>
+          <a href="/contactus">Contact Us</a>
+          <a href="/submitaproduct">Submit a Product</a>
         </div>
       </div>
+      
     </div>
     <div class="line">
       <div class="orange"></div>
@@ -102,7 +101,7 @@
     <main>
     <div class="main-contactussec">
         <div class="about">
-        <img class="im" src="cash.jpg">
+        <img class="im" src="https://www.thisiswhyimbroke.com/assets/images/cash-in-hand-logo-large.png">
         <div class="about-content">
             <p>
             <b>ThisIsWhyImBroke</b> is a free online magazine run by a bunch of
@@ -124,37 +123,35 @@
         <div class="contact">
         <div class="contactcontainer">
             <div class="leftconcontainer">
-            <img src="contact.jpg" alt="" >
-            <form action="submit_form.php" method="post">
-                <label for="topic">What are you contacting us about?*</label>
-                <select id="topic" name="topic" required>
-                <option value="" disabled selected>General questions/inquiry</option>
-                <option value="issue">Report an issue/bug</option>
-                <option value="product">Suggestion/Critique</option>
-                <option value="product">Advertising</option>
-                </select>
-                
-                <label for="name">Your name*</label>
-                <input type="text" id="name" name="name" required class="con-text">
-                
-                <label for="email">Email Address*</label>
-                <input type="email" id="email" name="email" required class="con-email">
-                
-                <label for="message">Your message*</label>
-                <textarea id="message" name="message" rows="4" required class="con-textarea"></textarea>
-                
-                
-                
-                <input type="submit" value="SUBMIT" class="con-submit">
-            </form>
+              <img src="{% static 'images/contact_us_icon2.png' %}" alt="" >
+              <form action="submit_form.php" method="post">
+                  <label for="topic">What are you contacting us about?*</label>
+                  <select id="topic" name="topic" required>
+                  <option value="" disabled selected>General questions/inquiry</option>
+                  <option value="issue">Report an issue/bug</option>
+                  <option value="product">Suggestion/Critique</option>
+                  <option value="product">Advertising</option>
+                  </select>
+                  
+                  <label for="name">Your name*</label>
+                  <input type="text" id="name" name="name" required class="con-text">
+                  
+                  <label for="email">Email Address*</label>
+                  <input type="email" id="email" name="email" required class="con-email">
+                  
+                  <label for="message">Your message*</label>
+                  <textarea id="message" name="message" rows="4" required class="con-textarea"></textarea>
+                  
+                  
+                  
+                  <input type="submit" value="SUBMIT" class="con-submit">
+              </form>
             </div>
             <div class="seperator">
-            <div class="sepborder"></div>
+              <div class="sepborder"></div>
             </div>
             <div class="rightconcontainer">
-            <h2>Submit A Product</h2>
-            <p>Want to get your product listed on our site? <br> You can now pitch to our readers! If our users <br> like it, we'll permanently list it!</p>
-            <button type="submit"><a href="submitprd.html">SUBMIT</a></button>
+              <img class="cont__image" src="{% static 'images/undraw_Contact_us_re_4qqt (1).png' %}">
             </div>
         </div>
         </div>
@@ -163,30 +160,27 @@
     </div>
     <hr class="footer-separator">
 
- <footer>
-  <div class="footer-content">
-    <div class="footer-top">
-      <div class="footer-text">
+    <footer>
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-text">
+          <p>
+            <img src="https://www.thisiswhyimbroke.com/assets/images/cash-in-hand-logo-large.png" alt="This Is Why Im Broke logo" class="footer-logo">
+            THIS IS WHY IM BROKE
+          </p>
+          <h4>© 2023 ThisIsWhyImBroke. All rights reserved.</h4>
+          <div class="footer-links">
+            <a href="/contactus">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
         <p>
-          <img src="cash.jpg" alt="This Is Why Im Broke logo" class="footer-logo">
-          THIS IS WHY IM BROKE
+          ThisIsWhyImBroke is reader supported, some products displayed may earn us a commission if you purchase through our links. ThisIsWhyImBroke is a participant in the Amazon Services LLC Associates Program.<a href=#>Learn more about how our site works.</a>
         </p>
-        <h4>© 2023 ThisIsWhyImBroke. All rights reserved.</h4>
-      </div>
-      <div class="footer-links">
-        <a href="#">Contact Us</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Affiliate Disclosure</a>
-        <a href="#">DMCA Policy</a>
       </div>
     </div>
-    <div class="footer-disclaimer">
-      <p>
-        ThisIsWhyImBroke is reader supported, some products displayed may earn us a commission if you purchase through our links. ThisIsWhyImBroke is a participant in the Amazon Services LLC Associates Program.<a href=#>Learn more about how our site works.</a>
-      </p>
-    </div>
-  </div>
- </footer>
+   </footer>
 </main>
 </body>
 </html>

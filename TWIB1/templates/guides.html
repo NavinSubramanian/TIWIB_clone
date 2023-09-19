@@ -21,132 +21,17 @@
 </head>
 
 <body>
-  <header class="main-navbar">
-    <div class="header-main">
-      <div class="image-container">
-        <img class="logo" src="{% static 'images/header-logo.png' %}" alt="ThisISWhyImBroke">
-      </div>
-      <div class="middle-section">
-        <input class="search-box" type="text" placeholder="Search...">
-        <button>
-          <img class="search-icon" src="{% static 'images/search-logo.png' %}" alt="searchicon">
-        </button>
-      </div>
-      <nav>
-        <ul>
-          <li><a id="openLogin">Login</a></li>
-          <li><a id="openPopup">Register</a></li>
-        </ul>
-
-        <!-- Popup for Login -->
-        <div id="loginContent">
-          <div class="center-form">
-            <form class="loginform">
-              <div class="login-container">
-                <img class="login-img" src="https://www.thisiswhyimbroke.com/assets/images/header-logo.png">
-                <h3>Login Here</h3>
-              </div>     
-              <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required class="form-text">
-              </div>
-              <div class="form-group">
-                  <label for="password">Password:</label>
-                  <input type="password" id="password" name="password" required class="form-password">
-              </div>
-              <div class="form-group">
-                <input type="submit" value="LOGIN" onclick="login()" class="form-submit">
-              </div>
-            </form>
-          </div>
-        </div>
-        <script>
-          document.getElementById("openLogin").addEventListener("click", function() {
-          document.getElementById("loginContent").style.display = "flex";
-        });
-        
-        document.getElementById("loginContent").addEventListener("click", function(event) {
-          if (event.target === this) {
-            this.style.display = "none";
-          }
-        });
-        </script>
-        <!-- Popup for Register -->
-        <div id="popupContainer">
-          <div id="popupContent">
-            <div class="modal-register">
-                <img class="small-logo-login" src="{% static 'images/header-logo.png' %}" alt="ThisIsWhyImBroke Logo" />
-                <h2>Join Us!</h2>
-                <div class="form-group-container">
-                  <div class="form-group">
-                    <input
-                      class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-                      type="text"
-                      name="email"
-                      ng-model="registerData.email"
-                      id="registerEmail"
-                      placeholder="Email address"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-                      type="password"
-                      name="password"
-                      ng-model="registerData.password"
-                      id="registerPassword"
-                      placeholder="Password"
-                    />
-                  </div>
-                  <input
-                    class="btn btn-default"
-                    type="submit"
-                    value="CREATE ACCOUNT"
-                    id="submit"
-                  /><br />
-                  <p style="color: rgb(170, 170, 170); font-size: 11px">
-                    By signing up you agree to our
-                    <a
-                      class="grey-link-tos"
-                      href="/privacy-policy"
-                      style="text-decoration: underline"
-                      >Terms and Policies</a
-                    >
-                  </p>
-                  <a class="grey-link" ng-click="switchToLogin()"
-                    >Already a member? Log in</a
-                  >
-                </div>
-              </form>
-            </div>
-            <div class="modal-register-post" style="display: none">
-              <h1>Success!</h1>
-              Your account has been created! You can now add items to your wishlist.<br/><button
-                class="button"
-                ng-click="close('Cancel');"
-              >
-                Finish
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <script>
-          document.getElementById("openPopup").addEventListener("click", function() {
-          document.getElementById("popupContainer").style.display = "block";
-        });
-        
-        document.getElementById("popupContainer").addEventListener("click", function(event) {
-          if (event.target === this) {
-            this.style.display = "none";
-          }
-        });
-        </script>
-      </nav>
+  <section class="landing__page">
+    <div class="main__logo">
+      <img src="{% static 'images/ThisIsWhyI_mBroke-removebg-preview.png' %}" class="header__img"></img>
     </div>
+  </section>
+  <section class="search__drop" style="margin-top: 10px">
+    <div class="drop__containers">
+      <!-- Need to change link for new button -->
 
-    <div class="navbar">
-      <a class="whatsnew" href="http://127.0.0.1:8000/">WHATS NEW</a>
+      <a href="#"><button class="btn-5">WHATS NEW</button></a>
+      
       <div class="dropdown" onmouseover="showRecipientOptions()" onmouseout="hideRecipientOptions()">
         <button class="dropbtn btn-1">GIFTS BY RECIPTENT
           <i class="fa fa-caret-down"></i>
@@ -159,15 +44,8 @@
           <a href="/kids">Kids</a>
           <a href="/teenboys">Teen Boys</a>
           <a href="/teengirls">Teen Girls</a>
-          <a href="/couples">Couples</a>
           <a href="/boyfriend">Boyfriend</a>
           <a href="/girlfriend">Girlfriend</a>
-          <a href="/husband">Husband</a>
-          <a href="/wife">Wife</a>
-          <a href="/persons">Persons</a>
-          <a href="/coworkers">Coworkers</a>
-          <a href="/boss">Boss</a>
-          <a href="/grandma">Grandma</a>
         </div>
       </div>
 
@@ -179,78 +57,45 @@
         <div class="dropdown-content">
           <a href="/fathersday">Father's Day</a>
           <a href="/mothersday">Mother's Day</a>
-          <a href="/girlvalentine">Valetines For Her</a>
-          <a href="/boyvalentine">Valetines For Him</a>
-          <a href="/aniversaryfemale">Anniversary For Her</a>
-          <a href="/aniversarymale">Anniversary For Him</a>
-          <a href="/birthdaygiftmale">Birthday Gifts For Him</a>
-          <a href="/whiteelephanth">White Elephant</a>
-          <a href="/secretsanta">Secret Santa</a>
-          <a href="/uglychristmas">Ugly Christmas Sweaters</a>
+          <a href="/valentinesday">Valetines Day</a>
+          <a href="/aniversary">Anniversary</a>
+          <a href="/birthdaygift">Birthday Gifts</a>
           <a href="/graduation">Graduation</a>
           <a href="/engagement">Engagement</a>
-          <a href="/groomsmen">Groomsmen</a>
-          <a href="/bridesmaids">Bridesmaids</a>
           <a href="/wedding">Wedding</a>
-          <a href="/housewarming">Housewarming</a>
-          <a href="/stockingboys">Stocking Stuffers For Boys</a>
         </div>
       </div>
 
 
       <div class="dropdown">
-        <button class="dropbtn">GIFTS BY CATEOGERY
+        <button class="dropbtn">TRENDING GIFTS
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="/experiencegifts">Experience Gifts</a>
-          <a href="/personalizedgifts">Personalized Gifts</a>
-          <a href="/workfromhome">Work From Home</a>
-          <a href="/funny">Funny</a>
-          <a href="/pranks">Pranks</a>
+          <a href="/anime">Anime</a>
           <a href="/gaggifts">Gag Gifts</a>
           <a href="/geek">Geek</a>
           <a href="/gamers">Gamers</a>
-          <a href="/starwars">Star Wars</a>
-          <a href="/harrypotter">Harry Potter</a>
-          <a href="/travelaccessories">Tavel Accessories</a>
-          <a href="/campingandoutdoor">Camping And Outdoors</a>
-          <a href="/apoclypsesurvival">Apoclypse Survival</a>
           <a href="/food">Food</a>
-          <a href="/coffee">Coffee</a>
-          <a href="/chocolate">Chocolate</a>
-          <a href="/wine">Wine</a>
+          <a href="/travel">Travel</a>
+          <a href="/movie">Movie</a>
         </div>
       </div>
-
 
       <div class="dropdown">
         <button class="dropbtn">MORE CATEGORIES
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="/allgiftsguide">All Gift Guides</a>
-          <a href="/random">Random</a>
-          <a href="/submitaproduct">Submit a Product</a>
+          <a href="/allgiftsguide">All Guides</a>
           <a href="/contactus">Contact Us</a>
+          <a href="/submitaproduct">Submit a Product</a>
         </div>
       </div>
+      
     </div>
-    <div class="line">
-      <div class="orange"></div>
-      <div class="yellow"></div>
-      <div class="lblue"></div>
-      <div class="blue"></div>
-      <div class="dblue"></div>
-    </div>
-  </header>
-  <script type="text/javascript">
-    window.addEventListener("scroll", function () {
-      var header = document.querySelector("header");
-      header.classList.toggle("sticky1", window.scrollY > 50);
-    })
-  </script>
-  <main>
+  </section>
+  <main style="width:100vw;">
     <div class="guides">
       <h1 class="guides-header">GIFT GUIDES</h1>
       <p class="guides-body">Holiday, birthday, special occasion and “just because” gift-buying is a breeze thanks to our carefully curated gift guides. The handpicked gift ideas on the lists here cover gifts your friends need, presents your family wants, and treats your loved ones didn’t know they had to have. There’s something for everyone right here, and we searched everywhere to give you gift guides that keep giving. From high-quality tech to tasty treats for foodies, bestsellers to unique one-of-a-kind items, the world of perfect presents is at your fingertips.</p>
@@ -286,30 +131,29 @@
       
     </div>
     </div> 
+
+
     <footer>
-      <div class="footer-content">
-        <div class="footer-top">
-          <div class="footer-text">
-            <p>
-              <img src="https://www.thisiswhyimbroke.com/assets/images/cash-in-hand-logo-small2.png" alt="This Is Why Im Broke logo" class="footer-logo">
-              THIS IS WHY IM BROKE
-            </p>
-            <h4>© 2023 ThisIsWhyImBroke. All rights reserved.</h4>
-          </div>
-          <div class="footer-links">
-            <a href="#">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Affiliate Disclosure</a>
-            <a href="#">DMCA Policy</a>
-          </div>
-        </div>
-        <div class="footer-disclaimer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-text">
           <p>
-            ThisIsWhyImBroke is reader supported, some products displayed may earn us a commission if you purchase through our links. ThisIsWhyImBroke is a participant in the Amazon Services LLC Associates Program.<a href=#>Learn more about how our site works.</a>
+            <img src="https://www.thisiswhyimbroke.com/assets/images/cash-in-hand-logo-large.png" alt="This Is Why Im Broke logo" class="footer-logo">
+            THIS IS WHY IM BROKE
           </p>
+          <h4>© 2023 ThisIsWhyImBroke. All rights reserved.</h4>
+          <div class="footer-links">
+            <a href="/contactus">Contact Us</a>
+          </div>
         </div>
       </div>
-     </footer>
+      <div class="footer-disclaimer">
+        <p>
+          ThisIsWhyImBroke is reader supported, some products displayed may earn us a commission if you purchase through our links. ThisIsWhyImBroke is a participant in the Amazon Services LLC Associates Program.<a href=#>Learn more about how our site works.</a>
+        </p>
+      </div>
+    </div>
+   </footer>
     
   </main>
 

@@ -11,7 +11,6 @@ class Webpage(models.Model):
 class Content(models.Model):
     name=models.CharField(max_length=200)
     type=models.CharField(max_length=200,default='men')
-    typ2=models.CharField(max_length=200,default='men')
     pic=models.CharField(max_length=2080)
     des=models.TextField()
     rate=models.FloatField()
@@ -28,3 +27,4 @@ class Contact(models.Model):
 class User(models.Model):
     name=models.CharField(max_length=2080)
     password=models.CharField(max_length=200)
+    products=models.TextField(default='9999')

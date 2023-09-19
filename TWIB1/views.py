@@ -1,269 +1,347 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from django.db.models import Q
 
-
+loggedin=False
+b='index1.html'
 a=''
-
-def check(request):
+users=''
+userid=''
+max1=0
+max2=300000
+def check(request,genre=a):
     n1=request.POST['user']
     n2=request.POST['password']
     user=User.objects.all().values()
     for i in user:
         if i['name']==n1 and i['password']==n2:
-            return render(request,'index1.html')
+            global users
+            users=n1
+            global b
+            b='afterlogin.html'
+            global userid,loggedin
+            loggedin=True
+            userid=i['id']
+            return render(request,'afterlogin.html',{'userid':i})
     return render(request,'index1.html')
 
+def logout(request,genre=a):
+        global users,b,userid,loggedin
+        users=''
+        b='index1.html'
+        userid=''
+        loggedin=False
+        return render(request,'index1.html')
 
-def register(request):
+def logins(request,genre=a):
+        global userid
+        print(userid)
+        n2=User.objects.filter(id=int(userid)).values()
+        c=[]
+        pro=list(set(map(int,n2[0]['products'].split(','))))
+        pro.sort(reverse=True)
+        for i in pro:
+                g=Content.objects.filter(id=i).values()
+                c.append(g)
+        return render(request,'login.html',{'n2':n2[0],'pros':c})
+
+def alogins(request,genre=a):
+        global b
+        b='afterlogin.html'
+        print('after',b)
+
+
+def register(request,genre=a):
     user1=request.POST.get('email')
     password1=request.POST.get('password')
     if password1 is not None:
             user=User(name=user1,password=password1)
             user.save()
             return render(request,'index1.html')
+    global b
     return render(request,'index1.html')
 
-def func(para,b):
+def savedproducts(request,genre=a):
+        id=request.POST['saved']
+        id=','+id
+        print(users)
+        user=User.objects.get(name=users)
+        user.products+=id
+        user.save()
+        global a
+        return func(a,request,max1,max2)
+
+def unsavedproducts(request,genre=a):
+        id=request.POST['unsaved']
+        print(id)
+        id=','+id
+        user=User.objects.get(name=users)
+        index=user.products.find(id)
+        user.products=user.products[:index]+user.products[index+len(id):]
+        print(user.products)
+        user.save()
+        global a
+        return logins(request,a)
+
+def func(para,b,max1,max2):
+        global loggedin
+        print(loggedin)
+        a=para
         option=Content.objects.all()
-        a=type
         option1=Webpage.objects.filter(type=para).values()
-        option2=Content.objects.filter(type=para).values()
-        return render(b,'men3.html',{'values':option1,'value':option2,'val':option})
-def func2(para,b):
-        a=type
-        option=Content.objects.all()
-        option1=Webpage.objects.filter(type='search').values()
-        option2=Content.objects.filter(Q(typ2__contains=para) | Q(name__contains=para)).values()
-        return render(b,'men3.html',{'values':option1,'value':option2,'v':para,'val':option})
+        option2=Content.objects.filter((Q(type__contains=para)|Q(name__contains=para))&Q(rate__range=(max1,max2))).values()
+        return render(b,'men3.html',{'values':option1,'value':option2,'val':option,'loggedin':loggedin,'max1':max1,'max2':max2})
 
 def func1(para,b):
-        a=type
+        global loggedin
+        print(loggedin)
+        a=para
         option=Content.objects.all()
         option1=Webpage.objects.filter(type=para).values()
-        option2=Content.objects.filter(type=para).values()
-        return render(b,'men4.html',{'values':option1,'value':option2,'val':option})
+        option2=Content.objects.filter(Q(type__contains=para)|Q(rate__gte=max1,rate__lte=max2)).values()
+        return render(b,'men4.html',{'values':option1,'value':option2,'val':option,'loggedin':loggedin,'max1':max1,'max2':max2})
 
+def func2(para1,para,b,max1,max2):
+        a=para1
+        print("para",para)
+        print("para1",para1)
+        global loggedin
+        option=Content.objects.all()
+        if para=='':
+                print('yes')
+                option2=Content.objects.filter((Q(type__contains=para1))&Q(rate__range=(max1,max2))).values()
+        else:
+                option2=Content.objects.filter((Q(name__contains=para)|Q(type__contains=para))&Q(rate__range=(max1,max2))).values()
+        option1=Webpage.objects.filter(type=para1).values()
+        return render(b,'men3.html',{'values':option1,'value':option2,'v':para,'val':option,'loggedin':loggedin,'max1':max1,'max2':max2})
 
 def index(request):
         option=Content.objects.all()
-        option2=Content.objects.filter(type='home').values()
-        return render(request,'index1.html',{'value':option2,'values':option})
+        option2=Content.objects.filter(type__contains='home').values()
+        global b
+        print(b)
+        return render(request,b,{'value':option2,'values':option})
 
-
-
+def filter(request,genre=a):
+        print(request)
+        max1=(request.POST.get('max1'))
+        max2=(request.POST.get('max2'))
+        return func(a,request,max1,max2)
+def remove(request,genre=a):
+        max1=0
+        max2=0
 def men(request):
+        global a,loggedin
+        print(loggedin)
+        option=Content.objects.all()
+        a='men'
         option1=Webpage.objects.filter(type='men').values()
         option2=Content.objects.filter(Q(type='men') | Q(type='dad')|Q(type='teenboys')|Q(type='boyfriend')|Q(type='husband')).values()
-        return render(request,'men3.html',{'values':option1,'value':option2})
+        return render(request,'men3.html',{'values':option1,'value':option2,'val':option,'loggedin':loggedin})
+
 
 def women(request):
+        option=Content.objects.all()
+        global a,loggedin
+        a='women'
+        print(loggedin)
         option1=Webpage.objects.filter(type='women').values()
         option2=Content.objects.filter(Q(type='women')| Q(type='mom')|Q(type='teengirls')).values()
-        return render(request,'men3.html',{'values':option1,'value':option2})
-
-def dad(request):
-        return func1('dad',request)
-
-
-def mom(request):
-        return func('mom',request)
-
-
-def kids(request):
-        return func('kids',request)
-
-
-def teenboys(request):
-        return func1('teenboys',request)
-
-
-def teengirls(request):
-        return func1('teengirls',request)
-
-
-def boyfriend(request):
-        return func('boyfriend',request)
-
-
-def husband(request):
-        return func('husband',request)
-
-
-def couples(request):
-        return func('couples',request)
-
-
-def wife(request):
-        return func('wife',request)
-
-
-def persons(request):
-        return func('persons',request)
-
-
-def coworkers(request):
-        return func('coworkers',request)
-
-
-def boss(request):
-        return func('boss',request)
-
-
-def grandma(request):
-        return func('grandma',request)
-
-
-def fathersday(request):
-        return func1('fathersday',request)
-
-def girlfriend(request):
-        return func1('girlfriend',request)
-
-def mothersday(request):
-        return func1('mothersday',request)
-
-
-
-def valentine(request):
-        option1=Webpage.objects.filter(type='valentine').values()
-        option2=Content.objects.filter(type='valentine').values()
-        return render(request,'men3.html',{'values':option1,'value':option2})
-
-def aniversary(request):
-        option1=Webpage.objects.filter(type='anniversary').values()
-        option2=Content.objects.filter(type='anniversary').values()
-        return render(request,'men3.html',{'values':option1,'value':option2})
-
-
-
-
-
-def whiteelephanth(request):
-        return func1('whiteelephanth',request)
-
-
-def secretsanta(request):
-        return func1('secretsanta',request)
-
-
-def uglychristmas(request):
-        return func1('uglychristmas',request)
-
-
-def graduation(request):
-        return func('graduation',request)
-
-
-def engagement(request):
-        return func1('engagement',request)
-
-def search(request,genre=a):
-        name=request.POST.get('query')
-        print(name)
-        return func2(name,request)
-def groomsmen(request):
-        return func1('groomsmen',request)
-
-
-def bridesmaids(request):
-        return func('bridesmaids',request)
-
-
-def wedding(request):
-        return func1('wedding',request)
-
-
-def housewarming(request):
-        return func1('housewarming',request)
-
-
-def stockingboys(request):
-        return func('stockingboys',request)
-
-
-def birthdaygift(request):
-        option1=Webpage.objects.filter(type='birthdaygift').values()
-        option2=Content.objects.filter(type='birthdaygift').values()
-        return render(request,'men4.html',{'values':option1,'value':option2})
-
-
-def personalizedgifts(request):
-        return func('personalizedgifts',request)
-
-
-def workfromhome(request):
-        return func1('workfromhome',request)
-
-
-def funny(request):
-        return func('funny',request)
-
-
-def pranks(request):
-        return func1('pranks',request)
-
-
-def gaggifts(request):
-        return func1('gaggifts',request)
-
-
-def geek(request):
-        return func1('geek',request)
-
-
-def gamers(request):
-        return func1('gamers',request)
-
-
-def movie(request):
-        return func1('movie',request)
+        return render(request,'men3.html',{'values':option1,'value':option2,'val':option,'loggedin':loggedin})
 
 
 def starwars(request):
-        return func1('starwars',request)
+        global a
+        a='starwars'
+        return func('starwars',request,max1,max2)
+def anime(request):
+        global a
+        a='anime'
+        return func('anime',request,max1,max2)
+def dad(request):
+        global a
+        a='dad'
+        return func('dad',request,max1,max2)
+
+def mom(request):
+        global a
+        a='mom'
+        return func('mom',request,max1,max2)
 
 
-def harrypotter(request):
-        return func1('harrypotter',request)
+def kids(request):
+        global a
+        a='kids'
+        return func('kids',request,max1,max2)
+
+
+def teenboys(request):
+        global a
+        a='teenboys'  
+        return func('teenboys',request,max1,max2)
+
+
+def teengirls(request):
+        global a
+        a='teengirls'  
+        return func('teengirls',request,max1,max2)
+
+
+def boyfriend(request):
+        global a
+        a='boyfriend'  
+        return func('boyfriend',request,max1,max2)
+
+
+
+def fathersday(request):
+        global a
+        a='fathersday'
+        return func1('fathersday',request,max1,max2)
+
+def girlfriend(request):
+        global a
+        a='girlfriend'
+        return func('girlfriend',request,max1,max2)
+
+def mothersday(request):
+        global a
+        a='mothersday'
+        return func('mothersday',request,max1,max2)
+
+
+
+def valentinesday(request):
+        global a
+        a='valentine'
+        option1=Webpage.objects.filter(type='valentine').values()
+        option2=Content.objects.filter(type__contains='valentine').values()
+        return render(request,'men3.html',{'values':option1,'value':option2})
+
+def aniversary(request):
+        global a
+        a='anniversary'
+        option1=Webpage.objects.filter(type='aniversary').values()
+        option2=Content.objects.filter(type__contains='aniversary').values()
+        return render(request,'men3.html',{'values':option1,'value':option2})
+
+
+def graduation(request):
+        global a
+        a='graduation'
+        return func('graduation',request,max1,max2)
+
+
+def engagement(request):
+        global a
+        a='engagement'
+        return func('engagement',request,max1,max2)
+
+def search(request,genre=a):
+        global a
+        print(a)
+        max1=(request.POST.get('max1'))
+        max2=(request.POST.get('max2'))
+        name=request.POST.get('query')
+        return func2(a,name,request,max1,max2)
+
+def wedding(request):
+        global a
+        a='wedding'
+        return func('wedding',request,max1,max2)
+
+
+def meme(request):
+        global a
+        a='meme'
+        return func('meme',request,max1,max2)
+
+
+def stupendous(request):
+        global a
+        a='stupendous'
+        return func('stupendous',request,max1,max2)
+
+
+def kitchen(request):
+        global a
+        a='kitchen'
+        return func('kitchen',request,max1,max2)
+
+
+def neutral(request):
+        global a
+        a='neutral'
+        return func('neutral',request,max1,max2)
+
+
+def funnyperson(request):
+        global a
+        a='funnyperson'
+        return func('funnyperson',request,max1,max2)
+
+
+def knockout(request):
+        global a
+        a='knockout'
+        return func('knockout',request,max1,max2)
+
+
+def birthdaygift(request):
+        global a
+        a='birthdaygifts'
+        option1=Webpage.objects.filter(type='birthdaygift').values()
+        option2=Content.objects.filter(type__contains='birthdaygift').values()
+        return render(request,'men3.html',{'values':option1,'value':option2})
+
+
+
+def funny(request):
+        global a
+        a='funny'
+        return func('funny',request,max1,max2)
+
+
+
+def gaggifts(request):
+        global a
+        a='gaggifts'
+        return func('gaggifts',request,max1,max2)
+
+
+def geek(request):
+        global a
+        a='geek'
+        return func('geek',request,max1,max2)
+
+
+def gamers(request):
+        global a
+        a='gamers'
+        return func('gamers',request,max1,max2)
+
+
+def movie(request):
+        global a
+        a='movie'
+        return func('movie',request,max1,max2)
 
 
 def travel(request):
-        return func1('travel',request)
-
-
-def campingandoutdoor(request):
-        return func1('campingandoutdoor',request)
-
-
-def apoclypsesurvival(request):
-        return func('apoclypsesurvival',request)
+        global a
+        a='travel'
+        return func('travel',request,max1,max2)
 
 
 def food(request):
-        return func1('food',request)
-
-
-def coffee(request):
-        return func1('coffee',request)
-
-
-def chocolate(request):
-        return func1('chocolate',request)
-
-
-def wine(request):
-        return func('wine',request)
-
+        global a
+        a='food'
+        return func('food',request,max1,max2)
 
 def allgiftsguide(request):
         return render(request,'guides.html')
-
-
-
-def random(request):
-        return func('random',request)
 
 
 def submitaproduct(request):
@@ -283,14 +361,4 @@ def contactus(request):
 
 
 def login(request):
-        return func('login',request)
-
-
-
-def girlfriend(request):
-        return func('girlfriend',request)
-
-
-def men4(request):
-        option1=Webpage.objects.filter(type='men4').values()
-        return render(request,'men4.html',{'values':option1})# Create your views here.
+        return func('login',request,max1,max2)
